@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Vue.js App</title>
+    <link rel="stylesheet" href="main.css" />
+  </head>
+  <body>
+    <div id="app">
+      <table>
+        <thead>
+          <tr>
+            <th class="id">ID</th>
+            <!-- /.id -->
+            <th class="comment">コメント</th>
+            <!-- /.comment -->
+            <th class="state">状態</th>
+            <!-- /.state -->
+            <th class="button">-</th>
+            <!-- /.button -->
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="item in todos" v-bind:key="item.id">
+            <th>{{ item.id }}</th>
+            <td>{{ item.comment }}</td>
+            <td class="state">
+              <button @click="doChangeState(item)">{{ item.state }}</button>
+            </td>
+            <!-- /.state -->
+            <td class="button">
+              <button @click="doRemove(item)">削除</button>
+            </td>
+            <!-- /.button -->
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>新しい作業の追加</h2>
+      <form class="add-form" v-on:submit.prevent="doAdd">
+        コメント <input type="text" ref="comment" />
+        <button type="submit">追加</button>
+      </form>
+      <!-- /.add-form -->
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
