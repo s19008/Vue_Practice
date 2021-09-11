@@ -7,8 +7,17 @@
   </head>
   <body>
     <div id="app">
+      <h1>チュートリアルToDoリスト</h1>
+
+      <label v-for="label in options">
+        <input type="radio" v-model="current" v-bind:value="label.value" />{{
+        label.label }}
+      </label>
+
+      {{ computedTodos.length }} 件を表示
+
       <table>
-        <thead>
+        <thead v-pre>
           <tr>
             <th class="id">ID</th>
             <!-- /.id -->
@@ -21,20 +30,23 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in todos" v-bind:key="item.id">
+          <tr v-for="item in computedTodos" v-bind:key="item.id">
             <th>{{ item.id }}</th>
             <td>{{ item.comment }}</td>
             <td class="state">
-              <button @click="doChangeState(item)">{{ item.state }}</button>
+              <button @click="doChangeState(item)">
+                {{ labels[item.state] }}
+              </button>
             </td>
             <!-- /.state -->
             <td class="button">
-              <button @click="doRemove(item)">削除</button>
+              <button @click.ctrl="doRemove(item)">削除</button>
             </td>
             <!-- /.button -->
           </tr>
         </tbody>
       </table>
+      <p>※削除ボタンはコントロールキーを押しながらクリックして下さい</p>
 
       <h2>新しい作業の追加</h2>
       <form class="add-form" v-on:submit.prevent="doAdd">
@@ -43,7 +55,7 @@
       </form>
       <!-- /.add-form -->
     </div>
-    <script src="https://unpkg.com/vue@next"></script>
-    <script src="main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script type="text/javascript" src="main.js"></script>
   </body>
 </html>
